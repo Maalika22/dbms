@@ -1,0 +1,43 @@
+create databsae exp3; 
+use exp3; 
+**
+CREATE TABLE department ( 
+deptno INTEGER PRIMARY KEY,        
+deptname VARCHAR(30) NOT NULL,   
+location VARCHAR(30) 
+); 
+**
+ALTER TABLE department 
+ADD designation VARCHAR(30);       
+**
+INSERT INTO department (deptno, deptname, location, designation) 
+VALUES  
+(9, 'accounting', 'hyderabad', 'manager'), 
+(10, 'research', 'chennai', 'professor'), 
+(11, 'sales', 'bangalore', 'salesman'), 
+(12, 'operations', 'mumbai', 'operator'), 
+(14, 'accounting', 'chennai', 'manager');
+**
+SELECT deptno, deptname, location, designation 
+FROM department 
+GROUP BY deptno; 
+**
+UPDATE department 
+SET deptname = 'Marketing', location = 'Boston', designation = 'Lead' 
+WHERE deptno = 9;
+**
+UPDATE department 
+SET location = NULL 
+WHERE deptno = 12;
+**
+START TRANSACTION; 
+INSERT INTO department (deptno, deptname, location, designation) 
+VALUES (15, 'logistics', 'delhi', 'supervisor'); 
+COMMIT; 
+START TRANSACTION; 
+DELETE FROM department WHERE deptno = 9; 
+ROLLBACK;
+**
+ALTER TABLE department 
+ADD CONSTRAINT deptname_unique UNIQUE (deptname);
+**

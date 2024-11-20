@@ -1,0 +1,117 @@
+QUERIES USING ANY, ALL, IN, EXCEPT, INTERSECT, UNION
+
+
+Create database exp8;
+
+
+Use exp8;  
+
+
+CREATE TABLE sailors ( 
+sid INTEGER PRIMARY KEY, 
+sname VARCHAR(20), 
+rating INTEGER, 
+age INTEGER 
+);
+
+
+CREATE TABLE boats ( 
+bid INTEGER PRIMARY KEY, 
+bname VARCHAR(20), 
+color VARCHAR(20) 
+); 
+
+
+CREATE TABLE reserves ( 
+sid INTEGER, 
+bid INTEGER, 
+day DATE, 
+PRIMARY KEY (sid, bid, day), 
+FOREIGN KEY (sid) REFERENCES sailors(sid), 
+FOREIGN KEY (bid) REFERENCES boats(bid) 
+);   
+
+
+INSERT INTO sailors VALUES (22, 'Aarav', 7, 45); 
+INSERT INTO sailors VALUES (29, 'Vivaan', 1, 33); 
+INSERT INTO sailors VALUES (31, 'Aditya', 79, 55); 
+INSERT INTO sailors VALUES (32, 'Vihaan', 8, 25); 
+INSERT INTO sailors VALUES (58, 'Kabir', 10, 35); 
+INSERT INTO sailors VALUES (64, 'Reyansh', 7, 35); 
+
+
+INSERT INTO boats VALUES (101, 'Narmada', 'blue'); 
+INSERT INTO boats VALUES (102, 'Ganga', 'red'); 
+INSERT INTO boats VALUES (103, 'Yamuna', 'green'); 
+INSERT INTO boats VALUES (104, 'Sindhu', 'red'); 
+INSERT INTO boats VALUES (105, 'Narmada', 'grey');
+
+
+INSERT INTO reserves VALUES (22, 101, '2004-01-01'); 
+INSERT INTO reserves VALUES (22, 102, '2004-01-01'); 
+INSERT INTO reserves VALUES (22, 103, '2004-02-01'); 
+INSERT INTO reserves VALUES (22, 105,'2004-02-01');  
+INSERT INTO reserves VALUES (31, 103,'2005-05-05'); 
+INSERT INTO reserves VALUES (32, 104,'2005-04-07');
+
+
+Select * from sailors;
+
+Select * from boats;
+
+Select * from reserves;
+**
+
+SELECT sid  
+FROM sailors  
+WHERE rating >= 8  
+UNION  
+SELECT sid  
+FROM reserves  
+WHERE bid = 103;
+**
+
+SELECT sid  
+FROM sailors  
+WHERE rating >= 8  
+INTERSECT  
+SELECT sid  
+FROM reserves  
+WHERE bid = 103;
+**
+
+SELECT s.sname  
+FROM sailors s  
+WHERE s.sid IN (SELECT r.sid FROM reserves r WHERE r.bid = 103);
+**
+
+SELECT s.sname  
+FROM sailors s  
+WHERE s.sid NOT IN (SELECT r.sid FROM reserves r WHERE r.bid = 103);
+**
+
+SELECT s.sid  
+FROM sailors s  
+WHERE s.rating > (SELECT MAX(s2.rating) FROM sailors s2 WHERE s2.sname = 
+'Vihaan');
+**
+
+SELECT sid  
+FROM sailors  
+WHERE rating = (SELECT MAX(rating) FROM sailors);
+**
+
+SELECT age  
+FROM sailors  
+WHERE sname LIKE 'a%a';
+**
+
+SELECT sname  
+FROM sailors  
+WHERE age BETWEEN 30 AND 45;
+**
+
+SELECT sname  
+FROM sailors  
+ORDER BY sname;
+**

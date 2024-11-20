@@ -1,0 +1,90 @@
+Write a PL/SQL Block for following: 
+1. To find maximum number from given three numbers. 
+2. For swapping 2 numbers. 
+3. Calculate the net salary and year salary.
+
+DECLARE 
+num1 NUMBER; 
+num2 NUMBER; 
+num3 NUMBER; 
+max_num NUMBER; 
+BEGIN -- Taking input from the user 
+num1 := &first_number; 
+num2 := &second_number; 
+num3 := &third_number; -- Finding the maximum number among the three 
+IF (num1 >= num2) AND (num1 >= num3) THEN 
+max_num := num1; 
+ELSIF (num2 >= num1) AND (num2 >= num3) THEN 
+max_num := num2; 
+ELSE 
+max_num := num3; 
+END IF; -- Display the maximum number 
+DBMS_OUTPUT.PUT_LINE('The maximum number is: ' || max_num); 
+END; 
+/
+
+
+DECLARE 
+a NUMBER;   
+b NUMBER;   
+BEGIN 
+a := &a;   
+b := &b;   
+DBMS_OUTPUT.PUT_LINE('Before swapping: a = ' || a || ', b = ' || b); 
+a := a + b;   
+b := a - b;   
+a := a - b;   
+DBMS_OUTPUT.PUT_LINE('After swapping: a = ' || a || ', b = ' || b); 
+END; 
+/ 
+
+
+DECLARE 
+basic_salary NUMBER; 
+da NUMBER;        -- Dearness Allowance (30% of basic) 
+hra NUMBER;       
+pf NUMBER;        -- House Rent Allowance (10% of basic) -- Provident Fund 
+net_salary NUMBER; 
+annual_salary NUMBER; 
+BEGIN -- Take input from user 
+basic_salary := &basic_salary; -- Calculate DA and HRA 
+da := basic_salary * 0.30; 
+hra := basic_salary * 0.10; -- Calculate PF based on conditions 
+IF basic_salary < 8000 THEN 
+pf := basic_salary * 0.07; 
+ELSIF basic_salary >= 8000 AND basic_salary <= 16000 THEN 
+pf := basic_salary * 0.10; 
+ELSE 
+pf := basic_salary * 0.12; -- Assuming PF is 12% for basic > 16000 
+END IF; -- Calculate net salary 
+net_salary := basic_salary + da + hra - pf; -- Calculate annual salary 
+annual_salary := net_salary * 12; -- Display the results 
+DBMS_OUTPUT.PUT_LINE('Basic Salary: ' || basic_salary); 
+DBMS_OUTPUT.PUT_LINE('DA (30%): ' || da); 
+DBMS_OUTPUT.PUT_LINE('HRA (10%): ' || hra); 
+DBMS_OUTPUT.PUT_LINE('PF: ' || pf); 
+DBMS_OUTPUT.PUT_LINE('Net Monthly Salary: ' || net_salary); 
+DBMS_OUTPUT.PUT_LINE('Annual Salary: ' || annual_salary); 
+END; 
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

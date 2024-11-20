@@ -1,0 +1,68 @@
+Write SQL queries to implement Views.  
+1. CREATE VIEW 
+2. INSERT IN VIEW 
+3. DELETE IN VIEW 
+4. UPDATE OF VIEW  
+5. DROP OF VIEW
+**
+
+create database exp6;  
+**
+
+CREATE TABLE EMPLOYEE ( 
+EMPLOYEE_NAME VARCHAR(10),    
+EMPLOYEE_NO INT,               
+DEPT_NAME VARCHAR(10),         
+DEPT_NO INT,                   
+DATE_OF_JOIN DATE, 
+SALARY DECIMAL(10, 2) 
+); 
+**
+
+INSERT INTO EMPLOYEE (EMPLOYEE_NAME, EMPLOYEE_NO, DEPT_NAME, DEPT_NO, 
+DATE_OF_JOIN, SALARY) 
+VALUES  
+('Rajesh', 1001, 'HR', 101, '2020-05-01', 50000.00), 
+('Sonal', 1002, 'Finance', 102, '2019-07-15', 60000.00), 
+('Amit', 1003, 'IT', 103, '2021-02-20', 75000.00), 
+('Neha', 1004, 'Marketing', 104, '2018-11-30', 55000.00), 
+('Vikram', 1005, 'Sales', 105, '2022-01-10', 62000.00);
+**
+
+
+select * from employee;
+**
+
+CREATE VIEW high_salary_employees AS 
+SELECT EMPLOYEE_NAME, SALARY 
+FROM EMPLOYEE 
+WHERE SALARY > 60000;
+**
+
+CREATE VIEW it_employees_view AS 
+SELECT EMPLOYEE_NAME, DEPT_NAME, SALARY 
+FROM EMPLOYEE 
+WHERE DEPT_NAME = 'IT' 
+WITH CHECK OPTION;
+**
+
+SELECT * FROM it_employees_view; 
+**
+
+INSERT INTO it_employees_view (EMPLOYEE_NAME, DEPT_NAME, SALARY) 
+VALUES ('Anil', 'IT', 72000);
+**
+
+INSERT INTO it_employees_view (EMPLOYEE_NAME, DEPT_NAME, SALARY) 
+VALUES ('Anil', 'IT', 72000);
+**
+
+SELECT * FROM it_employees_view;
+**
+
+
+DROP VIEW high_salary_employees;
+**
+
+DROP VIEW it_employees_view;
+**

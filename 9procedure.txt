@@ -1,0 +1,82 @@
+Creation of stored procedures, Execution of procedure and modification of procedures.
+**
+
+INSERT INTO student_info (stud_id, stud_code, stud_name, sub_name, marks, phone) VALUES 
+(1, 101, 'Mark', 'English', 68, '34545693537'), 
+(2, 102, 'Joseph', 'Physics', 70, '98765435659'), 
+(3, 103, 'John', 'Maths', 70, '97653269756'), 
+(4, 104, 'Barack', 'Maths', 98, '87698753256'), 
+(5, 105, 'Rinky', 'Maths', 85, '67531579757'), 
+(6, 106, 'Adam', 'Science', 92, '79642256864'), 
+(7, 107, 'Andrew', 'Science', 83, '56742437579'), 
+(8, 108, 'Brayan', 'Science', 85, '75234165670'), 
+(10, 110, 'Alexandar', 'Biology', 67, '2347346438');
+**
+
+Select * from student_info;
+**
+
+DELIMITER && 
+CREATE PROCEDURE get_merit_student () 
+BEGIN 
+SELECT * FROM student_info WHERE marks > 70; 
+SELECT COUNT(stud_code) AS Total_Student FROM student_info; 
+END && 
+DELIMITER ;
+**
+
+CALL get_merit_student();
+**
+
+DELIMITER && 
+CREATE PROCEDURE get_student (IN var1 INT) 
+BEGIN 
+SELECT * FROM student_info LIMIT var1; 
+SELECT COUNT(stud_code) AS Total_Student FROM student_info; 
+END && 
+DELIMITER ; 
+**
+
+CALL get_student(4);
+**
+
+DELIMITER && 
+CREATE PROCEDURE display_max_mark (OUT highestmark INT) 
+BEGIN 
+SELECT MAX(marks) INTO highestmark FROM student_info; 
+END && 
+DELIMITER ;
+**
+
+CALL display_max_mark(@max_marks); 
+**
+
+SELECT @max_marks AS Highest_Mark;
+**
+
+DELIMITER && 
+CREATE PROCEDURE display_marks (INOUT var1 INT) 
+BEGIN 
+SELECT marks INTO var1 FROM student_info WHERE stud_id = var1; 
+END && 
+DELIMITER ;     
+**
+
+SET @M = 3;   
+CALL display_marks(@M);
+SELECT @M AS Marks;
+**
+
+
+
+
+
+
+
+
+
+
+
+
+
+

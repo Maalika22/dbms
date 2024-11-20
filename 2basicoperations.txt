@@ -1,0 +1,42 @@
+Create database Student; 
+**
+Create Table Student(PRN integer primary key, FirstName varchar(15), LastName 
+varchar(15), CGPA float, PhoneNo varchar(10)); 
+*8
+ALTER Table Student RENAME COLUMN PhoneNo to PhoneNumber;  
+**
+ALTER Table Student ADD COLUMN Result boolean; 
+**
+ALTER Table Student DROP COLUMN Result; 
+**
+INSERT INTO student (PRN, FirstName, LastName, CGPA, PhoneNumber)   
+VALUES  
+(101, 'John', 'Doe', 8.5, '9876543210'),  
+(102, 'Jane', 'Smith', 9.0, '8765432109'),  
+(103, 'Alice', 'Johnson', 8.2, '7654321098'),  
+(104, 'Bob', 'Williams', 7.9, '6543210987'),  
+(105, 'Charlie', 'Brown', 8.8, '5432109876'); 
+**
+UPDATE student   
+SET PRN = 201   
+WHERE FirstName = 'John' AND LastName = 'Doe';  
+UPDATE student   
+SET PRN = 202   
+WHERE FirstName = 'Jane' AND LastName = 'Smith';  
+UPDATE student   
+SET PRN = 203   
+WHERE FirstName = 'Alice' AND LastName = 'Johnson';  
+UPDATE student   
+SET PRN = 204   
+WHERE FirstName = 'Bob' AND LastName = 'Williams';  
+UPDATE student   
+SET PRN = 205   
+WHERE FirstName = 'Charlie' AND LastName = 'Brown'; 
+**
+DELETE FROM student  
+WHERE PRN = 2241205; 
+**
+select PRN, CGPA from student
+**
+alter table student drop column lastname;
+**
